@@ -1,0 +1,70 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.8 Chrome/140.0.7339.240 Electron/38.4.0 Safari/537.36" version="28.2.8">
+  <diagram name="Page-1" id="HYvG_xjPNc_WGtbGdXQY">
+    <mxGraphModel dx="1678" dy="989" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" edge="1" parent="1" source="8zzdLGDRlHkpIa79IdIB-3" target="8zzdLGDRlHkpIa79IdIB-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-3" value="Goal Documents" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" vertex="1" parent="1">
+          <mxGeometry x="510" y="200" width="120" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" edge="1" parent="1" source="8zzdLGDRlHkpIa79IdIB-4" target="8zzdLGDRlHkpIa79IdIB-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-4" value="Ingestion / Preprocessing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" vertex="1" parent="1">
+          <mxGeometry x="495" y="430" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" edge="1" parent="1" source="8zzdLGDRlHkpIa79IdIB-5" target="8zzdLGDRlHkpIa79IdIB-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-5" value="Embedding + Indexing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" vertex="1" parent="1">
+          <mxGeometry x="495" y="610" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" edge="1" parent="1" source="8zzdLGDRlHkpIa79IdIB-6" target="8zzdLGDRlHkpIa79IdIB-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-6" value="Retrieval" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" vertex="1" parent="1">
+          <mxGeometry x="495" y="780" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" edge="1" parent="1" source="8zzdLGDRlHkpIa79IdIB-7" target="8zzdLGDRlHkpIa79IdIB-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-7" value="Candidate Generation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" vertex="1" parent="1">
+          <mxGeometry x="495" y="950" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" edge="1" parent="1" source="8zzdLGDRlHkpIa79IdIB-8" target="8zzdLGDRlHkpIa79IdIB-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-8" value="Evaluation Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" vertex="1" parent="1">
+          <mxGeometry x="495" y="1120" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-9" value="Best Schedule Selection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=20;fontStyle=0;fontFamily=Times New Roman;" vertex="1" parent="1">
+          <mxGeometry x="495" y="1290" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-17" value="Notes&lt;div&gt;Journal Entries&lt;br&gt;&lt;div&gt;Task Lists&lt;/div&gt;&lt;div&gt;Calendar Constraints&lt;/div&gt;&lt;div&gt;Priorities&lt;/div&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="660" y="205" width="470" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-18" value="Chunking, metadata tagging" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="660" y="405" width="470" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-19" value="Vector store (Chroma/FAISS)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="650" y="585" width="470" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-20" value="Semantic search over goals/constraints" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="660" y="755" width="470" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-21" value="LLM generates N Candidate scehdules (structured JSON output)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="660" y="925" width="470" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-22" value="Scores candidates on:&lt;div&gt;&lt;ul&gt;&lt;li&gt;Constraint satisfaction&lt;/li&gt;&lt;li&gt;Goal coverage&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="670" y="1120" width="470" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="8zzdLGDRlHkpIa79IdIB-23" value="Ranked output and rationale" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="660" y="1265" width="470" height="140" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
