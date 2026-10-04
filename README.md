@@ -1,0 +1,1 @@
+The objective of this project is to take the user's desired habits and activities, some parameters on their time budget, and to provide recommendations on how to budget their week's time.
