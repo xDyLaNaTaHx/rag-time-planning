@@ -1,0 +1,4 @@
+- Work 8am-6pm Monday-Thursday
+- Commute to work 6am-8am Monday-Thursday
+- Commute from work 6pm-8pm Monday-Thursday
+- Sleep from 12a-5a Sunday night-Thurs night 
