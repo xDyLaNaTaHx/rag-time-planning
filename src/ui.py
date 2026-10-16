@@ -1,6 +1,9 @@
+import logging
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.errors import PlannerError
 from src.main import generate_schedule_response
 from src.schemas import (
     ConstraintsPayload,
@@ -9,6 +12,8 @@ from src.schemas import (
     WeeklySchedule,
 )
 from src.store import store
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="RAG Time Planner", version="0.1.0")
 
@@ -24,6 +29,21 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+def _raise_planner_http(exc: BaseException) -> None:
+    """Map domain errors to safe HTTP responses; never leak raw SDK details."""
+    if isinstance(exc, PlannerError):
+        raise HTTPException(status_code=exc.status_code, detail=exc.to_detail()) from exc
+
+    logger.exception("Unexpected schedule generation failure")
+    raise HTTPException(
+        status_code=500,
+        detail={
+            "code": "schedule_generation_failed",
+            "message": "Schedule generation failed unexpectedly. Please try again.",
+        },
+    ) from exc
 
 
 @app.get("/api/health")
@@ -62,7 +82,12 @@ def generate_schedule(request: ScheduleRequest | None = None):
     if not goals and not constraints:
         raise HTTPException(
             status_code=400,
-            detail="Add at least one goal or constraint before generating a schedule.",
+            detail={
+                "code": "missing_inputs",
+                "message": (
+                    "Add at least one goal or constraint before generating a schedule."
+                ),
+            },
         )
 
     try:
@@ -72,19 +97,20 @@ def generate_schedule(request: ScheduleRequest | None = None):
             query=payload.query,
         )
     except Exception as exc:
-        raise HTTPException(
-            status_code=502,
-            detail=f"Failed to generate schedule: {exc}",
-        ) from exc
+        _raise_planner_http(exc)
 
 
 @app.get("/")
 def home():
     """Legacy endpoint: returns a free-text schedule using stored goals/constraints."""
-    schedule = generate_schedule_response(
-        goals=store.goals,
-        constraints=store.constraints,
-    )
+    try:
+        schedule = generate_schedule_response(
+            goals=store.goals,
+            constraints=store.constraints,
+        )
+    except Exception as exc:
+        _raise_planner_http(exc)
+
     return {
         "response": schedule.rationale,
         "schedule": schedule.model_dump(),
