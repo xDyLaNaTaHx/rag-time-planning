@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
+  ApiError,
   fetchConstraints,
   fetchGoals,
   generateSchedule,
@@ -19,6 +20,7 @@ export default function App() {
   const [generating, setGenerating] = useState(false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [aiFailed, setAiFailed] = useState(false)
   const [status, setStatus] = useState<string | null>(null)
 
   useEffect(() => {
@@ -35,6 +37,7 @@ export default function App() {
         setConstraints(constraintsRes.constraints)
       } catch (err) {
         if (!cancelled) {
+          setAiFailed(false)
           setError(
             err instanceof Error
               ? err.message
@@ -55,6 +58,7 @@ export default function App() {
   async function handleSave() {
     setSaving(true)
     setError(null)
+    setAiFailed(false)
     setStatus(null)
     try {
       const [goalsRes, constraintsRes] = await Promise.all([
@@ -65,6 +69,7 @@ export default function App() {
       setConstraints(constraintsRes.constraints)
       setStatus('Goals and constraints saved.')
     } catch (err) {
+      setAiFailed(false)
       setError(err instanceof Error ? err.message : 'Save failed.')
     } finally {
       setSaving(false)
@@ -74,6 +79,7 @@ export default function App() {
   async function handleGenerate() {
     setGenerating(true)
     setError(null)
+    setAiFailed(false)
     setStatus(null)
     try {
       await Promise.all([saveGoals(goals), saveConstraints(constraints)])
@@ -81,7 +87,16 @@ export default function App() {
       setSchedule(result)
       setStatus('Schedule generated for this week.')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Generation failed.')
+      const isAi =
+        err instanceof ApiError
+          ? err.isAiFailure
+          : true
+      setAiFailed(isAi)
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'The AI failed to generate a schedule. Please try again.',
+      )
     } finally {
       setGenerating(false)
     }
@@ -117,8 +132,19 @@ export default function App() {
       </header>
 
       {(error || status) && (
-        <div className={`banner ${error ? 'banner-error' : 'banner-ok'}`} role="status">
-          {error ?? status}
+        <div
+          className={`banner ${error ? (aiFailed ? 'banner-ai-error' : 'banner-error') : 'banner-ok'}`}
+          role="alert"
+          aria-live="assertive"
+        >
+          {error ? (
+            <>
+              {aiFailed && <strong className="banner-title">AI recommendation failed</strong>}
+              <span>{error}</span>
+            </>
+          ) : (
+            status
+          )}
         </div>
       )}
 

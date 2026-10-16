@@ -1,14 +1,18 @@
 import json
+import logging
 import os
 import re
 
 import chromadb
 from dotenv import load_dotenv
+from pydantic import ValidationError
 
+from src.errors import LLMResponseError
 from src.llm import send_prompt
 from src.schemas import WeeklySchedule
 
 load_dotenv()
+logger = logging.getLogger(__name__)
 
 SCHEDULE_SYSTEM_PROMPT = """You are a helpful calendar assistant.
 Given the user's goals and constraints, propose a realistic weekly schedule.
@@ -91,5 +95,20 @@ def generate_schedule_response(
         json_mode=True,
     )
 
-    data = _extract_json(raw)
-    return WeeklySchedule.model_validate(data)
+    try:
+        data = _extract_json(raw)
+    except (json.JSONDecodeError, TypeError, AttributeError) as exc:
+        logger.exception("Failed to parse AI schedule JSON")
+        raise LLMResponseError(
+            "The AI returned a schedule that could not be parsed. Please try again.",
+            cause=exc,
+        ) from exc
+
+    try:
+        return WeeklySchedule.model_validate(data)
+    except ValidationError as exc:
+        logger.exception("AI schedule JSON failed schema validation")
+        raise LLMResponseError(
+            "The AI returned a schedule in an unexpected format. Please try again.",
+            cause=exc,
+        ) from exc

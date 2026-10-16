@@ -144,6 +144,21 @@ button:disabled {
   color: var(--danger);
 }
 
+.banner-ai-error {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border-color: rgba(139, 86, 30, 0.4);
+  background: rgba(255, 244, 230, 0.9);
+  color: #7a3f12;
+}
+
+.banner-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
 .banner-ok {
   border-color: rgba(31, 107, 86, 0.35);
   color: var(--ok);

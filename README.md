@@ -43,3 +43,13 @@ API docs: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 | `GET` | `/api/constraints` | List constraints |
 | `PUT` | `/api/constraints` | Replace constraints |
 | `POST` | `/api/schedule/generate` | Propose a weekly schedule |
+
+AI failures return a structured error body `{ "code": "...", "message": "..." }` (for example `ai_provider_error` with HTTP 503) without leaking provider internals. The UI shows an **AI recommendation failed** banner in those cases.
+
+## Tests
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+pytest
+```

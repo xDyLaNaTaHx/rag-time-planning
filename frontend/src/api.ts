@@ -1,20 +1,74 @@
 import type { WeeklySchedule } from './types'
 
+export interface ApiErrorBody {
+  code?: string
+  message?: string
+}
+
+export class ApiError extends Error {
+  status: number
+  code: string
+
+  constructor(message: string, status: number, code = 'unknown_error') {
+    super(message)
+    this.name = 'ApiError'
+    this.status = status
+    this.code = code
+  }
+
+  get isAiFailure(): boolean {
+    return this.code.startsWith('ai_') || this.status === 503
+  }
+}
+
+function formatDetail(detail: unknown, fallback: string): { message: string; code: string } {
+  if (typeof detail === 'string') {
+    return { message: detail, code: 'unknown_error' }
+  }
+
+  if (detail && typeof detail === 'object') {
+    const body = detail as ApiErrorBody
+    if (typeof body.message === 'string' && body.message.trim()) {
+      return {
+        message: body.message,
+        code: typeof body.code === 'string' ? body.code : 'unknown_error',
+      }
+    }
+  }
+
+  if (Array.isArray(detail)) {
+    return { message: JSON.stringify(detail), code: 'validation_error' }
+  }
+
+  return { message: fallback, code: 'unknown_error' }
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(path, {
-    headers: { 'Content-Type': 'application/json', ...(init?.headers ?? {}) },
-    ...init,
-  })
+  let response: Response
+  try {
+    response = await fetch(path, {
+      headers: { 'Content-Type': 'application/json', ...(init?.headers ?? {}) },
+      ...init,
+    })
+  } catch {
+    throw new ApiError(
+      'Could not reach the planner API. Is the backend running?',
+      0,
+      'network_error',
+    )
+  }
 
   if (!response.ok) {
-    let detail = response.statusText
+    let detail: unknown = response.statusText
     try {
       const body = await response.json()
-      detail = body.detail ?? JSON.stringify(body)
+      detail = body.detail ?? body
     } catch {
       /* ignore parse errors */
     }
-    throw new Error(typeof detail === 'string' ? detail : JSON.stringify(detail))
+
+    const { message, code } = formatDetail(detail, response.statusText || 'Request failed')
+    throw new ApiError(message, response.status, code)
   }
 
   return response.json() as Promise<T>
