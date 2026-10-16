@@ -1,4 +1,4 @@
 - Finish time planning project
 - Squat 250 lbs
 - Run an 8 min mile
-- Perfect 3 Christmas carols
+- Study for test
