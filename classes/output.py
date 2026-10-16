@@ -1,13 +1,3 @@
-class ScheduleBlock(BaseModel):
-    ''' Represents a single block in the weekly schedule '''
-    day: str
-    start_time: str
-    end_time: str
-    activity: str
-    linked_goal: str
-    priority: int
+from src.schemas import ScheduleBlock, WeeklySchedule
 
-class WeeklySchedule(BaseModel):
-    ''' Represents the entire weekly schedule '''
-    blocks: list[ScheduleBlock]
-    rationale: str
+__all__ = ["ScheduleBlock", "WeeklySchedule"]
